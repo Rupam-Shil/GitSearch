@@ -1,5 +1,5 @@
 <template>
-  <div class="">Hi<i class="uil uil-0-plus"></i></div>
+  <div class=""></div>
 </template>
 
 <script>
