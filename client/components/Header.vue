@@ -18,9 +18,13 @@ export default {}
 
 <style lang="scss" scoped>
 header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 100vw;
   padding: 1rem;
   max-width: 1400px;
-  margin: 0 auto;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   align-items: center;

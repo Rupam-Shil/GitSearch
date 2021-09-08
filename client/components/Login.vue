@@ -2,7 +2,7 @@
   <div class="login-main">
     <h1 class="header">{{ header }}</h1>
     <div class="error" v-if="hasError">{{ errorContent }}</div>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" autocomplete="on">
       <input
         type="text"
         required
@@ -111,7 +111,7 @@ export default {
   padding: 2rem;
   color: var(--white-color);
   width: 100%;
-  height: 90%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

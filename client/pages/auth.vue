@@ -16,13 +16,16 @@ export default {}
 <style lang="scss" scoped>
 .main {
   max-width: 1400px;
-  margin: 1rem auto;
-  height: 80vh;
+  margin: auto;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   .left {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       width: 100%;
     }
@@ -39,6 +42,12 @@ export default {}
 @media only screen and (max-width: 768px) {
   .main {
     flex-direction: column;
+    .left {
+      align-items: flex-end;
+    }
+    .right {
+      flex: 2;
+    }
   }
 }
 </style>
