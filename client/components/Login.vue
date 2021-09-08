@@ -1,10 +1,27 @@
 <template>
   <div class="login-main">
     <h1 class="header">{{ header }}</h1>
+    <div class="error" v-if="hasError">{{ errorContent }}</div>
     <form @submit.prevent="onSubmit">
-      <input type="text" required placeholder="Name" v-if="isSignUp" />
-      <input type="email" required placeholder="Email Address" />
-      <input type="password" required placeholder="Password" />
+      <input
+        type="text"
+        required
+        placeholder="Name"
+        v-if="isSignUp"
+        v-model="nameInput"
+      />
+      <input
+        type="email"
+        required
+        placeholder="Email Address"
+        v-model="emailInput"
+      />
+      <input
+        type="password"
+        required
+        placeholder="Password(Min: 6 characters)"
+        v-model="passwordInput"
+      />
       <button type="submit">
         {{ header }}
       </button>
@@ -23,14 +40,36 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
       header: 'Log In',
       isSignUp: false,
+      nameInput: '',
+      emailInput: '',
+      passwordInput: '',
+      hasError: false,
+      errorContent: '',
     }
   },
   methods: {
+    ...mapMutations(['changeAuth']),
+    checkResponse(res) {
+      if (res.errors) {
+        this.hasError = true
+        this.errorContent = res.errors
+        if (res.login) {
+          this.loginSignUpToggle()
+        }
+        if (res.signup) {
+          this.loginSignUpToggle()
+        }
+      } else {
+        this.changeAuth(true)
+        this.$router.push('/')
+      }
+    },
     loginSignUpToggle() {
       this.isSignUp = !this.isSignUp
       if (this.isSignUp) {
@@ -39,7 +78,30 @@ export default {
         this.header = 'Log In'
       }
     },
-    onSubmit() {},
+    async onSubmit() {
+      if (this.isSignUp) {
+        try {
+          const res = await this.$axios.$post('http://localhost:3000/signup', {
+            name: this.nameInput,
+            email: this.emailInput,
+            password: this.passwordInput,
+          })
+          this.checkResponse(res)
+        } catch (err) {
+          console.log(err)
+        }
+      } else {
+        try {
+          const res = await this.$axios.$post('http://localhost:3000/login', {
+            email: this.emailInput,
+            password: this.passwordInput,
+          })
+          this.checkResponse(res)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    },
   },
 }
 </script>
@@ -49,10 +111,19 @@ export default {
   padding: 2rem;
   color: var(--white-color);
   width: 100%;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  .error {
+    width: 100%;
+    height: max-content;
+    background: rgb(153, 99, 99);
+    border: 1px solid rgb(231, 53, 53);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+  }
   form {
     display: flex;
     flex-direction: column;
