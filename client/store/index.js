@@ -9,6 +9,5 @@ export const mutations = {
   },
   changeUserData(state, payload) {
     state.userData = payload
-    console.log(state.userData)
   },
 }
