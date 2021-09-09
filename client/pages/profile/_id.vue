@@ -46,11 +46,7 @@
           </div>
         </div>
         <div class="userdashboard-main-bottom-right">
-          <img
-            class="user-graph"
-            src="https://activity-graph.herokuapp.com/graph?username=ADHI2648&bg_color=2B213A&color=E5289E&line=DA5B0B&point=E1E8EB"
-            alt=""
-          />
+          <img class="user-graph" :src="graphLink" alt="" />
           <!-- <img class="user-graph" src="~/assets/login.png" alt="" /> -->
         </div>
       </div>
@@ -71,10 +67,12 @@ export default {
       updatedDate: '',
       location: '',
       company: '',
+      graphLink: '',
     }
   },
   mounted() {
     this.updatedDate = this.userData.updated_at.split('T')[0]
+    this.graphLink = `https://activity-graph.herokuapp.com/graph?username=${this.userData.login}&bg_color=2B213A&color=E5289E&line=DA5B0B&point=E1E8EB`
     if (this.userData.company === null) {
       this.company = 'Not Updated'
     } else {
