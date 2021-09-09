@@ -3,6 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
 router.post(
 	'/signup',
@@ -52,6 +53,16 @@ router.post('/login', async (req, res) => {
 		}
 	} else {
 		res.json({ errors: 'User Do Not Exist! please Sign Up', signup: true });
+	}
+});
+router.post('/user-details', async (req, res) => {
+	try {
+		const value = await axios.get(
+			`https://api.github.com/users/${req.body.name}`
+		);
+		res.json(value.data);
+	} catch (err) {
+		res.json({ errors: "User doesn't exists" });
 	}
 });
 
