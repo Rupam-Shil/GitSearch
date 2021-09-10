@@ -201,7 +201,7 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .userdashboard {
-    margin-top: 5rem;
+    margin: 5rem 0;
     padding: 1rem;
     height: max-content;
     &-main {

@@ -1,6 +1,7 @@
 export const state = () => ({
   isAuthed: false,
   userData: {},
+  userName: '',
 })
 
 export const mutations = {
@@ -9,5 +10,6 @@ export const mutations = {
   },
   changeUserData(state, payload) {
     state.userData = payload
+    state.userName = payload.login
   },
 }
