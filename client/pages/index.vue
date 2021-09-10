@@ -30,11 +30,11 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   // TODO: uncomment before production
-  async fetch({ store, redirect }) {
-    if (!store.state.isAuthed) {
-      redirect('/auth')
-    }
-  },
+  // async fetch({ store, redirect }) {
+  //   if (!store.state.isAuthed) {
+  //     redirect('/auth')
+  //   }
+  // },
   data() {
     return {
       inputValue: '',

@@ -57,11 +57,12 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  async fetch({ store, redirect }) {
-    if (!store.state.isAuthed) {
-      redirect('/auth')
-    }
-  },
+  // async fetch({ store, redirect }) {
+  //   if (!store.state.isAuthed) {
+  //     redirect('/auth')
+  //   }
+  // },
+  layout: 'userLayout',
   data() {
     return {
       updatedDate: '',
