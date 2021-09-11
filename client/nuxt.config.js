@@ -16,6 +16,9 @@ export default {
       },
     ],
   },
+  router: {
+    middleware: 'auth',
+  },
   server: {
     port: 8000, // default: 3000
   },

@@ -16,7 +16,8 @@ router.post(
 		if (!errors.isEmpty()) {
 			res.json({ errors: errors.array()[0].msg });
 		} else {
-			const { name, email, password } = req.body;
+			let { name, email, password } = req.body;
+			email = email.toLowerCase();
 			const checkUser = await User.findOne({ email });
 			if (checkUser) {
 				res.json({
@@ -41,7 +42,9 @@ router.post(
 	}
 );
 router.post('/login', async (req, res) => {
-	const { email, password } = req.body;
+	let { email, password } = req.body;
+	email = email.toLowerCase();
+
 	const user = await User.findOne({ email });
 	if (user) {
 		const hashedPassword = user.password;
